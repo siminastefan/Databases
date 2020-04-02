@@ -1,0 +1,47 @@
+CREATE TABLE Product
+(
+	PID INT PRIMARY KEY,
+	SerialNumber INT NOT NULL UNIQUE,
+	Price INT 
+)
+
+ALTER TABLE Product ADD [Name] Varchar(50)
+
+CREATE TABLE Customer
+(
+	CID INT PRIMARY KEY IDENTITY(1,1),
+	Age INT,
+	[Name] VARCHAR(50)
+)
+
+drop table Customer
+
+ALTER TABLE Customer ALTER COLUMN CNP BIGINT
+CREATE TABLE [Order]
+(
+	OID INT PRIMARY KEY,
+	PID INT REFERENCES Product(PID),
+	CID INT REFERENCES Customer(CID),
+)
+drop table [Order]
+
+SELECT * FROM Product
+INSERT INTO Product VALUES(1, 234346, 123, 'tigaie')
+INSERT INTO Product VALUES(2, 234334, 150, 'oala')
+INSERT INTO Product VALUES(3, 264446, 7, 'Skittles')
+INSERT INTO Product VALUES(4, 134346, 4, 'Milka')
+INSERT INTO Product VALUES(5, 246846, 25, 'prosop')
+INSERT INTO Product VALUES(6, 637246, 180, 'Barbie')
+INSERT INTO Product VALUES(7, 234243, 45, 'tigaie')
+
+SELECT * FROM Customer
+INSERT INTO Customer VALUES(1, 1870826592, 'Pop')
+INSERT INTO Customer VALUES(2, 2970329361, 'Popescu')
+INSERT INTO Customer VALUES(3, 1661220438, 'Ionescu')
+INSERT INTO Customer VALUES(4, 1780826592, 'Pop')
+
+SELECT * FROM [Order]
+INSERT INTO [Order] VALUES(1, 1, 1)
+INSERT INTO [Order] VALUES(2, 2, 1)
+INSERT INTO [Order] VALUES(3, 5, 1)
+INSERT INTO [Order] VALUES(4, 6, 2)

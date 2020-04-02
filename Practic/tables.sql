@@ -1,0 +1,68 @@
+IF OBJECT_ID ('RechargingStationCars', 'U') IS NOT NULL
+	DROP TABLE RechargingStationCars
+
+IF OBJECT_ID ('CityCitizens', 'U') IS NOT NULL
+	DROP TABLE CityCitizens
+
+IF OBJECT_ID ('CitizenCars', 'U') IS NOT NULL
+	DROP TABLE CitizenCars
+
+IF OBJECT_ID ('Cities', 'U') IS NOT NULL
+	DROP TABLE Cities
+
+IF OBJECT_ID ('Citizens', 'U') IS NOT NULL
+	DROP TABLE Citizens
+
+IF OBJECT_ID ('Cars', 'U') IS NOT NULL
+	DROP TABLE Cars
+
+IF OBJECT_ID ('RechargingStations', 'U') IS NOT NULL
+	DROP TABLE RechargingStations
+
+CREATE TABLE RechargingStations
+(
+	RSID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	Location VARCHAR(50)
+)
+
+CREATE TABLE Cars
+(
+	CAID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	CurrentFuelLevel INT,
+	NoOfSeats INT
+)
+
+CREATE TABLE Citizens
+(
+	PID SMALLINT PRIMARY KEY IDENTITY (1,1),
+	CitizenName VARCHAR(30),
+	Age INT
+)
+
+CREATE TABLE Cities
+(
+	CID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	CityName VARCHAR(30),
+	Mayor VARCHAR(30)
+)
+
+CREATE TABLE CitizenCars
+(
+	PID SMALLINT REFERENCES Citizens (PID),
+	CAID SMALLINT REFERENCES Cars (CAID),
+	PRIMARY KEY (PID, CAID)
+)
+
+CREATE TABLE CityCitizens
+(
+	PID SMALLINT REFERENCES Citizens (PID),
+	CID SMALLINT REFERENCES Cities (CID),
+	PRIMARY KEY (PID, CID)
+)
+
+CREATE TABLE RechargingStationCars
+(
+	CAID SMALLINT REFERENCES Cars (CAID),
+	RSID SMALLINT REFERENCES RechargingStations (RSID),
+	PRIMARY KEY(RSID, CAID)
+)
