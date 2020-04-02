@@ -1,0 +1,19 @@
+USE [UBB Library Database]
+GO
+
+-- Add/remove a column
+CREATE PROCEDURE addColumn
+AS
+BEGIN
+    ALTER TABLE LIBRARIAN
+	ADD  LAge SMALLINT;
+END;
+GO
+
+CREATE PROCEDURE removeColumn
+AS
+BEGIN
+	ALTER TABLE LIBRARIAN
+	DROP COLUMN LAge;
+END;
+GO
